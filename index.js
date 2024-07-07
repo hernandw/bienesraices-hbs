@@ -3,6 +3,7 @@ import { engine } from "express-handlebars";
 import 'dotenv/config'
 import appRoutes from "./routes/appRouter.js";
 import userRoutes from "./routes/userRouter.js";
+import propertyRoutes from "./routes/propertyRoutes.js";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 
@@ -57,6 +58,7 @@ app.use(express.static("public"));
 //routes
 app.use("/api", appRoutes);
 app.use("/auth", userRoutes);
+app.use("/property", propertyRoutes);
 
 
 

@@ -1,5 +1,5 @@
 import express from "express";
-import { propiedadesController } from "../controllers/propiedadesController.js";
+import { propiedadesController } from "../controllers/propertyController.js";
 import { protectedRoutes } from "../middlewares/protectedRoutes.js";
 const router = express.Router();
 

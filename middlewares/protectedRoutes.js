@@ -8,19 +8,19 @@ export const protectedRoutes = async(req, res, next) => {
   const { tokenJWT } = req.cookies;
 
   if (!tokenJWT) {
-    return res.clearCookie("tokenJWT").redirect("auth/login");
+    return res.clearCookie("tokenJWT").redirect("/login");
   }
 
   try {
     const user = jwt.verify(tokenJWT, process.env.JWT_SECRET_KEY);
     if(!user) {
-      return res.clearCookie("tokenJWT").redirect("auth/login");
+      return res.clearCookie("tokenJWT").redirect("/login");
     }
 
     req.user = user.id;
     return next();
   } catch (error) {
-    return res.clearCookie("tokenJWT").redirect("auth/login");
+    return res.clearCookie("tokenJWT").redirect("/login");
   }
   
   
