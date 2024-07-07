@@ -24,7 +24,7 @@ const loginForm = (req, res) => {
 };
 
 const forget = (req, res) => {
-  res.render("/auth/forget", {
+  res.render("auth/forget", {
     title: "Reestablece tu contraseña",
   });
 };
@@ -230,7 +230,7 @@ const login = async (req, res) => {
           expiresIn: 4000000,
         });
 
-        return res.redirect("property/propiedades");
+        return res.redirect("property/");
       } else {
         return res.render("auth/login", {
           title: "Iniciar Sesion",
