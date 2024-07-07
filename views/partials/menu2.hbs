@@ -1,0 +1,33 @@
+<header class="container-fluid">
+    <div class="container mx-auto flex justify-between items-center">
+
+
+        {{#if barra}}
+        <nav class="my-5 text-sm md:flex md:items-center md:gap-3 font-bold hidden">
+
+            <a href="/propiedades/">Mis Propiedades</a>
+            <a href="#">Mis Perfil</a>
+            <a href="#" class="bg-indigo-800 py-2 px-10 rounded-lg">Cerrar Sesión</a>
+
+        </nav>
+
+        {{else}}
+        <nav
+            class="bg-cyan-800 h-20 w-full my-5 text-sm md:flex md:items-center  font-bold text-white hidden ">
+            <a class=" h-full w-28 text-white uppercase font-bold text-xs text-center hover:text-white hover:bg-green-500 flex justify-center items-center hover:font-bold border-l-2 border-white active:bg-green-500"
+                href="/api/">Inicio</a>
+            <a class=" h-full w-24 text-white uppercase font-bold text-xs text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold border-l-2 border-white"
+                href="/api/about">Quienes Somos</a>
+            <a class=" h-full w-24 text-white uppercase font-bold text-xs text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold border-l-2 border-white"
+                href="/auth/login">Inicio Sesión</a>
+            <a class=" h-full w-24 text-white uppercase font-bold text-xs text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold border-l-2 border-white"
+                href="/auth/register">Registrarse</a>
+            <a class=" h-full w-24 text-white uppercase font-bold text-xs text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold border-l-2 border-white"
+                href="/property/">Propiedades</a>
+            <a class=" h-full w-24 text-white uppercase font-bold text-xs text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold border-l-2 border-white"
+                href="/api/contact">Contacto</a>
+        </nav>
+
+        {{/if}}
+    </div>
+</header>

@@ -4,9 +4,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "css": "postcss public/css/tailwind.css -o public/css/style.css --watch",
+    "css": "postcss ./public/css/tailwind.css -o ./public/css/style.css --watch",
     "start": "node index.js",
-    "dev": "node --watch index.js"
+    "dev": "node --watch index.js",
+    "tables": "node config/generateTables.js",
+    "delete": "node config/deleteTables.js"
   },
   "keywords": [],
   "author": "Williams Hernández",

@@ -1,8 +1,8 @@
 import express from "express";
 import { engine } from "express-handlebars";
-import userRoutes from "./routes/userRouter.js";
-import propiedadesRoutes from "./routes/propiedadesRouter.js";
+import 'dotenv/config'
 import appRoutes from "./routes/appRouter.js";
+import userRoutes from "./routes/userRouter.js";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 
@@ -55,11 +55,11 @@ app.use(
 app.use(express.static("public"));
 
 //routes
-app.use("/property", propiedadesRoutes);
 app.use("/api", appRoutes);
 app.use("/auth", userRoutes);
 
 
+
 app.listen(PORT, () => {
-  console.log(`Server running on port http://localhost:${PORT}`);
+  console.log(`Server running on port http://localhost:${PORT}/api`);
 });

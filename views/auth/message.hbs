@@ -1,0 +1,15 @@
+
+<h2 class="text-center text-2xl font-extrabold">{{title}}</h2>
+<p class="text-center text-xl my-10">{{message}}</p>
+{{#if confirmed}}
+<div class="text-center">
+    <a class="bg-indigo-500 text-white uppercase font-bold text-xs p-2 rounded text-center mb-1" href="/login">Iniciar sesión</a>
+</div>
+
+{{else}}
+
+<div class="text-center">
+    <a class="bg-cyan-800 text-white uppercase font-bold text-xs p-2 rounded text-center mb-1" href="/api">Volver</a>
+</div>
+
+{{/if}} 
