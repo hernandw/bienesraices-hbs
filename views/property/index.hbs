@@ -1,9 +1,7 @@
 <div class="py-10">
-  <h1 class="my-10 text-4xl font-extrabold text-center">Raices
-    <span class="font-normal">Sueños</span>
-  </h1>
-  <a href="/propiedades/crear"
-    class="rounded-md bg-indigo-600 text-white uppercase font-bold text-sm py-2 px-10 text-center hover:bg-indigo-700 transition-colors w-full sm:w-auto inline-block mb-5">Publicar
+
+  <a href="/property/create"
+    class="rounded-md bg-cyan-800 text-white uppercase font-bold text-sm py-2 px-10 text-center hover:bg-indigo-700 transition-colors w-full sm:w-auto inline-block mb-5">Publicar
     Propiedad</a>
   {{#if propiedades}}
 
@@ -19,8 +17,8 @@
           </div>
 
           <div class="sm:w-2/4 md:w-3/6 lg:w-4/6 space-y-3">
-            <a href="/propiedades/{{this.id}}"
-              class="block text-2xl font-extrabold text-indigo-600 truncate">{{this.title}}</a>
+            <a href="/property/{{this.id}}"
+              class="block text-2xl font-extrabold text-cyan-800 truncate">{{this.title}}</a>
             <p class="text-sm text-black font-bold">{{this.categoria}}</p>
             <p class="text-sm text-gray-500 font-bold flex items-center"><svg xmlns="http://www.w3.org/2000/svg"
                 fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -36,10 +34,10 @@
               <input type="submit" value={{#if this.published}}Publicado{{else}}'No publicado'{{/if}}
                 class="w-full px-2 py-2 md:py-1 text-xs leading-5 font-semibold rounded cursor-pointer {{#if this.published}}bg-green-100 text-green-700{{else}}bg-yellow-100 text-yellow-700{{/if}}">
             </form>
-            <a href="/propiedades/edit/{{this.id}}"
+            <a href="/property/edit/{{this.id}}"
               class="w-full px-2 py-2 md:py-1 text-xs leading-5 font-semibold rounded cursor-pointer bg-indigo-100 text-indigo-700">Editar</a>
 
-            <form action="/propiedades/delete/{{this.id}}" method="POST">
+            <form action="/property/delete/{{this.id}}" method="POST">
               <button type="submit"
                 class="w-full px-2 py-2 md:py-1 text-xs leading-5 font-semibold rounded cursor-pointer bg-red-100 text-red-700">Eliminar</button>
             </form>
@@ -61,10 +59,10 @@
       <input id="paginas" type="hidden" name="paginas" value={{totalPages}}>
       {{#if (eq page 1)}}<a class="none" id="prev"></a> {{else}}<a id="prev"
         class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-        href="/propiedades?page={{rest page 1}}">Anterior</a>{{/if}}
+        href="/property?page={{rest page 1}}">Anterior</a>{{/if}}
       {{#if (eq totalPages page)}} {{else}}<a id="next"
         class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-        href="/propiedades?page={{sum page 1}}">Siguiente</a>{{/if}}
+        href="/property?page={{sum page 1}}">Siguiente</a>{{/if}}
 
     </div>
 
@@ -80,8 +78,8 @@
     <div class="hidden sm:block">
       <nav class="relative z-0 inline-flex rounded-md shadow-md" aria-label="Pagination">
         {{#each paginas}}
-        <a href="/propiedades?page={{this}}"
-          class="{{#if (eq this ../page) }} text-indigo-600 bg-indigo-50  border-indigo-500 {{else}} bg-white border-gray-500 hover:bg-gray-50 {{/if}}  relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
+        <a href="/property?page={{this}}"
+          class="{{#if (eq this ../page) }} text-cyan-600 bg-cyan-100  border-cyan-500 {{else}} bg-white border-gray-500 hover:bg-gray-50 {{/if}}  relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
           aria-current="page">{{this}}</a>
         {{/each}}
 
@@ -95,3 +93,5 @@
   {{/if}}
 
 </div>
+
+<script src="/js/edit.js"></script>

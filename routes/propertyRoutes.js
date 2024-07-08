@@ -3,17 +3,21 @@ import { propiedadesController } from "../controllers/propertyController.js";
 import { protectedRoutes } from "../middlewares/protectedRoutes.js";
 const router = express.Router();
 
-router.get("/", protectedRoutes, propiedadesController.admin);
+router.get("/index", protectedRoutes, propiedadesController.admin);
 
-router.get("/crear",protectedRoutes, propiedadesController.createForm);
+router.get("/create", protectedRoutes, propiedadesController.createForm);
 
-router.post("/crear", protectedRoutes, propiedadesController.saveForm);
+router.post("/create", protectedRoutes, propiedadesController.saveForm);
 
 router.get("/edit/:id", protectedRoutes, propiedadesController.editForm);
 
-router.put("/edit/:id",  protectedRoutes, propiedadesController.editProperty);
+router.put("/edit/:id", protectedRoutes, propiedadesController.editProperty);
 
-router.post("/delete/:id", protectedRoutes, propiedadesController.deleteProperty);
+router.post(
+  "/delete/:id",
+  protectedRoutes,
+  propiedadesController.deleteProperty
+);
 
 //Propiedades Públicas
 

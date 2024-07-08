@@ -34,7 +34,7 @@ const admin = async (req, res) => {
 };
 
 const createForm = async (req, res) => {
-  res.render("property/crear", {
+  res.render("property/create", {
     title: "Crear Propiedades",
     rooms: ["1", "2", "3", "4"],
     categories: await models.findAllCategory(),
@@ -102,7 +102,7 @@ const saveForm = async (req, res) => {
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.render("property/crear", {
+      return res.render("property/create", {
         errors: errors.array(),
         old: req.body,
         rooms: ["1", "2", "3", "4"],
@@ -114,7 +114,7 @@ const saveForm = async (req, res) => {
 
     //guardamos la imagen en el servidor y en la BBDD como enlace
     if (!req.files) {
-      return res.render("property/crear", {
+      return res.render("property/create", {
         errors: errors.array(),
         old: req.body,
         rooms: ["1", "2", "3", "4"],
@@ -155,22 +155,23 @@ const saveForm = async (req, res) => {
 };
 
 const editForm = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const idUser = req.user;
+  const { id } = req.params;
+  const idUser = req.user;
+  //validamos que exista la propiedad
+  const prop = await models.findPropertyById(id);
+  console.log(prop);
 
-    //validamos que exista la propiedad
-    const prop = await models.findPropertyById(id);
+  if (!prop) {
+    return res.redirect("/property");
+  }
+  if (prop.user_id !== idUser) {
+    return res.redirect("/property");
+  }
 
-    if (!prop) {
-      return res.redirect("/property");
-    }
-
-    if (prop.user_id !== idUser) {
-      return res.redirect("/property");
-    }
-
-    res.render("property/editar", {
+  
+   try {
+    
+    res.render(`property/edit`, {
       title: "Editar Propiedades",
       rooms: ["1", "2", "3", "4"],
       categories: await models.findAllCategory(),
@@ -180,7 +181,9 @@ const editForm = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
-  }
+  } 
+
+    
 };
 
 const editProperty = async (req, res) => {
@@ -217,10 +220,12 @@ const editProperty = async (req, res) => {
     };
 
     await models.editProperty(propiedades);
-    res.status(200).redirect("/property");
+    res.status(200).redirect("/property/index");
   } catch (error) {
     res.status(500).json({ error: error.message });
-  }
+  } 
+
+    
 };
 
 const deleteProperty = async (req, res) => {
@@ -233,7 +238,7 @@ const deleteProperty = async (req, res) => {
 
   try {
     await models.deleteProperty(id);
-    res.redirect("/property");
+    res.redirect("/property/index");
   } catch (error) {
     console.log("Error code: ", error.code, "\nMessage: ", error.message);
   }

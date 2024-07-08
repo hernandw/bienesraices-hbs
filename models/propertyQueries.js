@@ -80,7 +80,7 @@ const findAllPropertyByUser = async (id, limit, offset) => {
   
   try {
     const sql = {
-      text: "SELECT p.id, p.title, price.name AS precio, p.published, p.image, c.name AS categoria FROM propiedades p JOIN price ON p.precio_id = price.id JOIN category c ON p.category_id = c.id WHERE user_id = $1 LIMIT $2 OFFSET $3",
+      text: "SELECT p.id, p.title, price.name AS precio, p.published, p.image, c.name AS categoria FROM propiedades p JOIN price ON p.precio_id = price.id JOIN category c ON p.category_id = c.id WHERE user_id = $1 ORDER BY p.id LIMIT $2 OFFSET $3 ",
       values: [id, limit, offset],
     };
     const response = await pool.query(sql);
@@ -114,7 +114,7 @@ const countPropertyByUser = async (id) => {
 const findPropertyById = async (id) => {
   try {
     const sql = {
-      text: "SELECT p.id, p.title, price.name AS precio, p.published, p.image, p.wc, p.rooms, p.parking, p.street, p.lat, p.lng, c.name AS categoria FROM propiedades p JOIN price ON p.precio_id = price.id JOIN category c ON p.category_id = c.id WHERE p.id = $1",
+      text: "SELECT p.id, p.title, p.description, p.user_id, p.category_id, p.precio_id, price.name AS precio, p.published, p.image, p.wc, p.rooms, p.parking, p.street, p.lat, p.lng, c.name AS categoria FROM propiedades p JOIN price ON p.precio_id = price.id JOIN category c ON p.category_id = c.id WHERE p.id = $1",
       values: [id],
     };
     const response = await pool.query(sql);
