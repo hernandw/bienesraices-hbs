@@ -148,7 +148,7 @@ const saveForm = async (req, res) => {
     };
 
     const result = await models.createProperty(propiedad);
-    await res.status(201).redirect("/property");
+    await res.status(201).redirect("/property/index");
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -256,6 +256,15 @@ const getPropertiesById = async (req, res) => {
   });
 };
 
+const getAllProperties = async (req, res) => {
+  try {
+    const properties = await models.getAllProperties();
+    res.status(200).json(properties);
+  } catch (error) {
+    console.log("Error code: ", error.code, "\nMessage: ", error.message);
+  }
+};
+
 export const propiedadesController = {
   admin,
   createForm,
@@ -264,4 +273,5 @@ export const propiedadesController = {
   editProperty,
   deleteProperty,
   getPropertiesById,
+  getAllProperties,
 };

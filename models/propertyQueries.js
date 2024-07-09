@@ -188,6 +188,22 @@ const deleteProperty = async (id) => {
   }
 };
 
+const getAllProperties = async () => {
+  try {
+    const sql = {
+      text: "SELECT p.id, p.title, p.description, p.user_id, p.category_id, p.precio_id, price.name AS precio, p.published, p.image, p.wc, p.rooms, p.parking, p.street, p.lat, p.lng, c.name AS categoria FROM propiedades p JOIN price ON p.precio_id = price.id JOIN category c ON p.category_id = c.id",
+    };
+    const response = await pool.query(sql);
+    if (response.rowCount > 0) {
+      return response.rows;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.log("Error code: ", error.code, "\nMessage: ", error.message);
+  }
+};
+
 export const models = {
   createProperty,
   findAllCategory,
@@ -197,4 +213,5 @@ export const models = {
   editProperty,
   deleteProperty,
   countPropertyByUser,
+  getAllProperties,
 };

@@ -1,1 +1,19 @@
-<h2>Home Page</h2>
+
+<div class="bg-cyan-900 mt-1 py-5 w-full flex justify-around">
+    {{#each category}}
+<div><a href="/category/{{this.id}}" class="text-sm font-bold uppercase text-white w-full">{{this.name}}</a></div>
+    {{/each}}
+</div>
+
+<div class="py-5">
+    <h1 class="text-center text-4xl font-extrabold my-5">Ubicación en el mapa</h1>
+
+    <div id="map" class="w-full h-[600px]"></div>
+
+</div>
+
+
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/js/mapa-inicio.js"></script>
