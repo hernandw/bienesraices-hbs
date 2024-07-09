@@ -2,11 +2,12 @@ import { models } from "../models/propertyQueries.js";
 
 const home = async(req, res) => {
     const category = await models.findAllCategory();
-    console.log(category)
-    console.log()
+    const price = await models.findAllPrice();
+    
   res.render("api/home", {
     title: "Home",
-    category 
+    category,
+    price 
   });
 };
 

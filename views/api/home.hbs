@@ -1,13 +1,39 @@
-
 <div class="bg-cyan-900 mt-1 py-5 w-full flex justify-around">
     {{#each category}}
-<div><a href="/category/{{this.id}}" class="text-sm font-bold uppercase text-white w-full">{{this.name}}</a></div>
+    <div><a href="/category/{{this.id}}" class="text-sm font-bold uppercase text-white w-full">{{this.name}}</a></div>
     {{/each}}
 </div>
 
 <div class="py-5">
     <h1 class="text-center text-4xl font-extrabold my-5">Ubicación en el mapa</h1>
+    <div class="flex flex-col md: flex-row items-center py-10 gap-4">
+        <h2 class="text-sm uppercase text-gray-800 font-bold">Filtrar Propiedades</h2>
+        <div class="w-full md:flex justify-center items-center gap-2 my-2 ">
+            <div class="w-full lg:w-1/2 mb-2">
+                <label for="categoria" class="text-sm w-24 uppercase text-gray-500 font-bold">Categorias</label>
+                <select name="category" id="category"
+                    class="w-full py-2 px-3 border border-gray-300 rounded-md placeholder-gray-400">
+                    <option value="0">Todas</option>
+                    {{#each category}}
+                    <option value="{{this.id}}">{{this.name}}</option>
+                    {{/each}}
+                </select>
 
+            </div>
+            <div class="w-full lg:w-1/2">
+                <label for="categoria" class="text-sm w-24 uppercase text-gray-500 font-bold">Precios</label>
+                <select name="category" id="price"
+                    class="w-full py-2 px-3 border border-gray-300 rounded-md placeholder-gray-400">
+                    <option value="0">Todas</option>
+                    {{#each price}}
+                    <option value="{{this.id}}">{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+
+        </div>
+
+    </div>
     <div id="map" class="w-full h-[600px]"></div>
 
 </div>
