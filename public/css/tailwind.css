@@ -5,3 +5,8 @@
 .text-boton {
     color: white !important;
 }
+
+.icon {
+    width: 2rem;
+    height: 2.5rem;
+}

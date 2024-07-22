@@ -23,6 +23,10 @@ const getDataProperty = async () => {
 }
 
 const getPropiedades = async (propy) => {
+
+  //limpiar propiedades
+
+  markers.clearLayers();
   propy.forEach((prop) => {
     const marker = new L.marker([prop?.lat, prop?.lng], {
       autoPan: true,
@@ -61,19 +65,22 @@ const getPropiedades = async (propy) => {
 
   const filterProperties = () => {
     const resultado = propiedades.filter(filterCategory).filter(filterPrice);
-    console.log("resultado", resultado);
+    getPropiedades(resultado);
     
   };
 
   const filterCategory = (propiedad) => {
     const resultado = filters.category ? propiedad.category_id === filters.category : propiedad;
+    return resultado
 
-    return resultado;
+  };
+
+
+  const filterPrice = (propiedad) => {
+    return filters.price ? propiedad.precio_id === filters.price : propiedad;
   };
 };
 
-/* const filterPrice = (propiedad) => {
-  return filters.price ? propiedad.precio_id === filters.price : propiedad;
-}; */
+
 
 getDataProperty()

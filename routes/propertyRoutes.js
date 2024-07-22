@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/index", protectedRoutes, propiedadesController.admin);
 
-router.get("/api", protectedRoutes, propiedadesController.getAllProperties);
+router.get("/api",  propiedadesController.getAllProperties);
 
 router.get("/create", protectedRoutes, propiedadesController.createForm);
 
