@@ -265,6 +265,25 @@ const getAllProperties = async (req, res) => {
   }
 };
 
+const allPropertyByCategoryId = async (req, res) => {
+  try {
+const { id } = req.params;
+    const properties = await models.allPropertyByCategoryId(id);
+    res.status(200).render('property/category', {
+      title: "CATEGORIAS",
+      properties: properties,
+      category: await models.findAllCategory(),
+      
+    }
+
+    )
+    
+  } catch (error) {
+    console.log("Error code: ", error.code, "\nMessage: ", error.message);
+  }
+};
+
+
 export const propiedadesController = {
   admin,
   createForm,
@@ -274,4 +293,5 @@ export const propiedadesController = {
   deleteProperty,
   getPropertiesById,
   getAllProperties,
+  allPropertyByCategoryId
 };

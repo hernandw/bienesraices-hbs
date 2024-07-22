@@ -25,4 +25,6 @@ router.post(
 
 router.get("/:id", propiedadesController.getPropertiesById);
 
+router.get('/category/:id', propiedadesController.allPropertyByCategoryId);
+
 export default router;
