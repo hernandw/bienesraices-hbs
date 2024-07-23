@@ -43,7 +43,15 @@
                 {{#if user}}
 
 
-                enviale mensajes al vendedor
+                <form method="POST">
+                    <div class="space-y-5">
+                        <label for="nessage">Mensaje</label>
+                        <textarea name="message" id="message" placeholder="Escribe tu mensaje" class="w-full p-2 border border-gray-300 rounded-lg placeholder-gray-400 shadow"></textarea>
+
+                        <button type="submit" class="w-full p-2 bg-cyan-900 text-white rounded-lg uppercase font-bold shadow hover:bg-cyan-500 transition-colors duration-300 cursor-pointer">Enviar mensaje</button>
+
+                    </div>
+                </form>
 
                 {{else}}
                 <div class="flex justify-center flex-col items-center gap-2">
