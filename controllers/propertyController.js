@@ -159,7 +159,7 @@ const editForm = async (req, res) => {
   const idUser = req.user;
   //validamos que exista la propiedad
   const prop = await models.findPropertyById(id);
-  console.log(prop);
+  
 
   if (!prop) {
     return res.redirect("/property/index");
@@ -249,6 +249,9 @@ const getPropertiesById = async (req, res) => {
 
   const prop = await models.findPropertyById(id);
 
+  if (!prop) {
+    return res.redirect("/notFound");
+  } 
   res.render("property/detail", {
     title: "Detalle",
     propiedad: prop,
@@ -259,6 +262,9 @@ const getPropertiesById = async (req, res) => {
 const getAllProperties = async (req, res) => {
   try {
     const properties = await models.getAllProperties();
+    if (!properties) {
+      return res.redirect("/notFound");
+    } 
     res.status(200).json(properties);
   } catch (error) {
     console.log("Error code: ", error.code, "\nMessage: ", error.message);
@@ -269,6 +275,9 @@ const allPropertyByCategoryId = async (req, res) => {
   try {
 const { id } = req.params;
     const properties = await models.allPropertyByCategoryId(id);
+   /*  if (!properties) {
+      return res.redirect("/notFound");
+    }  */
     res.status(200).render('property/category', {
       title: "CATEGORIAS",
       properties: properties,
@@ -286,6 +295,9 @@ const { id } = req.params;
 const allPropertyByFilter = async (req, res) => {
   const { id } = req.params;
   const properties = await models.allPropertyByFilter(id);
+  if (!properties) {
+    return res.redirect("/notFound");
+  } 
   res.status(200).json(properties);
 };
 

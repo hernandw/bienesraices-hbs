@@ -56,12 +56,14 @@ app.use(
 app.use(express.static("public"));
 
 //routes
-app.use("/api", appRoutes);
+
 app.use("/auth", userRoutes);
 app.use("/property", propertyRoutes);
+app.use("/", appRoutes);
+
 
 
 
 app.listen(PORT, () => {
-  console.log(`Server running on port http://localhost:${PORT}/api`);
+  console.log(`Server running on port http://localhost:${PORT}`);
 });

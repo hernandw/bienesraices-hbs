@@ -1,5 +1,17 @@
-<div class="bg-cyan-900 mt-1 py-5 w-full flex justify-around">
+<div class="bg-cyan-900 hidden lg:block py-5 w-full">
+    <div class="containermx-auto flex justify-between px-3">
+   <nav class="flex gap-4 items-center">
     {{#each category}}
-    <div><a href="/property/category/{{this.id}}" class="text-sm font-bold uppercase text-white w-full">{{this.name}}</a></div>
+    
+        <a href="/property/category/{{this.id}}"
+            class="text-sm font-bold uppercase text-white w-full">{{this.name}}</a>
     {{/each}}
+    </nav>
+    <form action="/search" method="POST" class="flex gap-3 items-center">
+    <label for="termino" class="text-sm font-bold uppercase text-white">Búsqueda</label>
+    <input type="text" name="termino" id="termino" class="p-2 rounded-lg shadow text-sm" placeholder="Buscar propiedades">
+    <input type="submit" value="Buscar" class="p-2 bg-cyan-800 text-white uppercase font-bold cursor-pointer text-sm rounded-lg hover:bg-cyan-400">
+
+    </form>
+</div>
 </div>

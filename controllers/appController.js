@@ -1,18 +1,17 @@
 import { models } from "../models/propertyQueries.js";
 
-const home = async(req, res) => {
-    const category = await models.findAllCategory();
-    const price = await models.findAllPrice();
-    const casas = await models.allPropertyByFilter(3);
-    const departamentos = await models.allPropertyByFilter(1);
-    
+const home = async (req, res) => {
+  const category = await models.findAllCategory();
+  const price = await models.findAllPrice();
+  const casas = await models.allPropertyByFilter(3);
+  const departamentos = await models.allPropertyByFilter(1);
+
   res.render("api/home", {
     title: "Home",
     category,
     price,
     casas,
-    departamentos
-
+    departamentos,
   });
 };
 
@@ -46,6 +45,20 @@ const about = (req, res) => {
   });
 };
 
+const search = async(req, res) => {
+  const { termino } = req.body;
+
+  if (!termino.trim()) {
+    return res.redirect("back");
+  }
+const properties = await models.allPropertyBySearch(termino)
+res.render('property/search',{
+  title: 'Resultado de la Búsqueda',
+  properties
+})
+
+};
+
 export const controller = {
   home,
   notFound,
@@ -53,4 +66,5 @@ export const controller = {
   formRegister,
   formContact,
   about,
+  search,
 };

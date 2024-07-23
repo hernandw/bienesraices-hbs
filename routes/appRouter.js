@@ -12,6 +12,8 @@ router.get('/contact', controller.formContact)
 
 router.get('/about', controller.about)
 
+router.post('/search', controller.search)
+
 router.get('*', controller.notFound)
 
 
