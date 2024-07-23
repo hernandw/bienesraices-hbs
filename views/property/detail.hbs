@@ -1,4 +1,3 @@
-
 <div class="py-5">
     <h1 class="text-4xl my-10 font-extrabold text-center">{{propiedad.title}}</h1>
     <div>
@@ -6,7 +5,7 @@
                 class="font-normal">{{propiedad.categoria}}</span></a> <a href="#" class="font-bold text-lg"></a>
     </div>
 
-    <div class="mt-5 md:flex md:gap-4">
+    <div class="mt-5 md:flex md:gap-4 md:items-start">
         <div class="md:w-2/3 bg-white shadow rounded-lg">
             <img src="{{propiedad.image}}" alt="imagen de la propiedad {{propiedad.title}}">
             <div class="px-5 py-10 space-y-5">
@@ -28,7 +27,7 @@
 
         </div>
 
-        <div class="md:w-1/3">
+        <aside class="md:w-1/3 bg-white shadow rounded-lg">
             <h3 class="text-lg leading-6 font-medium text-gray-900">Ubicación:</h3>
             <div id="map" class="h-96">
                 <p id="lat" class="hidden">{{propiedad.lat}}</p>
@@ -39,12 +38,30 @@
             <div class="p-5">
                 <p class="text-gray-600 font-bold text-xs">Dirección <span
                         class="text-gray-800 text-lg block">{{propiedad.street}}</span></p>
+                {{#unless vendedor}}
+                <h3 class="text-2xl text-center my-10 font-extrabold text-gray-900">Vendedor</h3>
+                {{#if user}}
+
+
+                enviale mensajes al vendedor
+
+                {{else}}
+                <div class="flex justify-center flex-col items-center gap-2">
+                    <p>Si deseas contactar al vendedor debes crear una <a class="font-bold text-cyan-800"
+                            href="/auth/register"> cuenta</a></p>
+                </div>
+                {{/if}}
+                {{/unless}}
+
+
+
+
 
             </div>
 
-        </div>
+        </aside>
     </div>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="/js/mapa.js"></script>

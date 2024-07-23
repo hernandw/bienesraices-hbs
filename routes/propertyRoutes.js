@@ -1,12 +1,13 @@
 import express from "express";
 import { propiedadesController } from "../controllers/propertyController.js";
 import { protectedRoutes } from "../middlewares/protectedRoutes.js";
+import identifyUser from "../middlewares/identifyUser.js";
 
 const router = express.Router();
 
 router.get("/index", protectedRoutes, propiedadesController.admin);
 
-router.get("/api",  propiedadesController.getAllProperties);
+router.get("/api", propiedadesController.getAllProperties);
 
 router.get("/create", protectedRoutes, propiedadesController.createForm);
 
@@ -24,10 +25,8 @@ router.post(
 
 //Propiedades Públicas
 
-router.get("/:id", propiedadesController.getPropertiesById);
+router.get("/:id", identifyUser, propiedadesController.getPropertiesById);
 
-router.get('/category/:id', propiedadesController.allPropertyByCategoryId);
-
-
+router.get("/category/:id", identifyUser, propiedadesController.allPropertyByCategoryId);
 
 export default router;

@@ -209,7 +209,7 @@ const allPropertyByCategoryId = async (id) => {
     };
     const response = await pool.query(sql);
     if (response.rowCount > 0) {
-      console.log(response.rows);
+      
       return response.rows;
     } else {
       return false;

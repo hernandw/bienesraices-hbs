@@ -4,6 +4,7 @@ import { generateId } from "../helpers/generateId.js";
 import { generarArray } from "../helpers/generarArray.js";
 import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
+import { isSeller } from "../helpers/isSeller.js";
 
 const admin = async (req, res) => {
   const id = req.user;
@@ -39,7 +40,7 @@ const createForm = async (req, res) => {
     rooms: ["1", "2", "3", "4"],
     categories: await models.findAllCategory(),
     prices: await models.findAllPrice(),
-    barra: true
+    barra: true,
   });
 };
 
@@ -108,7 +109,7 @@ const saveForm = async (req, res) => {
         rooms: ["1", "2", "3", "4"],
         categories: await models.findAllCategory(),
         prices: await models.findAllPrice(),
-        barra: true
+        barra: true,
       });
     }
 
@@ -121,7 +122,7 @@ const saveForm = async (req, res) => {
         categories: await models.findAllCategory(),
         prices: await models.findAllPrice(),
         errors: [{ msg: "Subir una imagen es obligatorio" }],
-        barra: true
+        barra: true,
       });
     }
     const { image } = req.files;
@@ -147,7 +148,7 @@ const saveForm = async (req, res) => {
       image: imageUrl,
     };
 
-    const result = await models.createProperty(propiedad);
+    await models.createProperty(propiedad);
     await res.status(201).redirect("/property/index");
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -159,7 +160,6 @@ const editForm = async (req, res) => {
   const idUser = req.user;
   //validamos que exista la propiedad
   const prop = await models.findPropertyById(id);
-  
 
   if (!prop) {
     return res.redirect("/property/index");
@@ -168,22 +168,18 @@ const editForm = async (req, res) => {
     return res.redirect("/property/index");
   }
 
-  
-   try {
-    
+  try {
     res.render(`property/edit`, {
       title: "Editar Propiedades",
       rooms: ["1", "2", "3", "4"],
       categories: await models.findAllCategory(),
       prices: await models.findAllPrice(),
       old: prop,
-      barra: true
+      barra: true,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
-  } 
-
-    
+  }
 };
 
 const editProperty = async (req, res) => {
@@ -223,9 +219,7 @@ const editProperty = async (req, res) => {
     res.status(200).redirect("/property/index");
   } catch (error) {
     res.status(500).json({ error: error.message });
-  } 
-
-    
+  }
 };
 
 const deleteProperty = async (req, res) => {
@@ -249,13 +243,20 @@ const getPropertiesById = async (req, res) => {
 
   const prop = await models.findPropertyById(id);
 
+
+
   if (!prop) {
     return res.redirect("/notFound");
-  } 
+  }
+
+  const vendedor = isSeller(req.user?.id, prop.user_id);
+  
   res.render("property/detail", {
     title: "Detalle",
     propiedad: prop,
-    barra: true
+    barra: true,
+    user: req.user,
+    vendedor
   });
 };
 
@@ -264,7 +265,7 @@ const getAllProperties = async (req, res) => {
     const properties = await models.getAllProperties();
     if (!properties) {
       return res.redirect("/notFound");
-    } 
+    }
     res.status(200).json(properties);
   } catch (error) {
     console.log("Error code: ", error.code, "\nMessage: ", error.message);
@@ -273,20 +274,14 @@ const getAllProperties = async (req, res) => {
 
 const allPropertyByCategoryId = async (req, res) => {
   try {
-const { id } = req.params;
+    const { id } = req.params;
     const properties = await models.allPropertyByCategoryId(id);
-   /*  if (!properties) {
-      return res.redirect("/notFound");
-    }  */
-    res.status(200).render('property/category', {
-      title: "CATEGORIAS",
-      properties: properties,
-      category: await models.findAllCategory(),
-      
-    }
 
-    )
-    
+    res.status(200).render("property/category", {
+      title: "CATEGORIAS",
+      properties,
+      category: await models.findAllCategory(),
+    });
   } catch (error) {
     console.log("Error code: ", error.code, "\nMessage: ", error.message);
   }
@@ -297,10 +292,9 @@ const allPropertyByFilter = async (req, res) => {
   const properties = await models.allPropertyByFilter(id);
   if (!properties) {
     return res.redirect("/notFound");
-  } 
+  }
   res.status(200).json(properties);
 };
-
 
 export const propiedadesController = {
   admin,
@@ -312,5 +306,5 @@ export const propiedadesController = {
   getPropertiesById,
   getAllProperties,
   allPropertyByCategoryId,
-  allPropertyByFilter
+  allPropertyByFilter,
 };
