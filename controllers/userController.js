@@ -230,7 +230,7 @@ const login = async (req, res) => {
           expiresIn: 4000000,
         });
 
-        return res.redirect("/property");
+        return res.redirect("/property/index");
       } else {
         return res.render("auth/login", {
           title: "Iniciar Sesion",

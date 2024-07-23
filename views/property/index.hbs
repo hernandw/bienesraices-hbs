@@ -41,10 +41,6 @@
               <button type="submit"
                 class="w-full px-2 py-2 md:py-1 text-xs leading-5 font-semibold rounded cursor-pointer bg-red-100 text-red-700">Eliminar</button>
             </form>
-
-
-
-
           </div>
         </div>
       </li>
@@ -59,7 +55,7 @@
       <input id="paginas" type="hidden" name="paginas" value={{totalPages}}>
       {{#if (eq page 1)}}<a class="none" id="prev"></a> {{else}}<a id="prev"
         class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-        href="/property?page={{rest page 1}}">Anterior</a>{{/if}}
+        href="/property/index?page={{rest page 1}}">Anterior</a>{{/if}}
       {{#if (eq totalPages page)}} {{else}}<a id="next"
         class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
         href="/property?page={{sum page 1}}">Siguiente</a>{{/if}}
@@ -78,8 +74,8 @@
     <div class="hidden sm:block">
       <nav class="relative z-0 inline-flex rounded-md shadow-md" aria-label="Pagination">
         {{#each paginas}}
-        <a href="/property?page={{this}}"
-          class="{{#if (eq this ../page) }} text-cyan-600 bg-cyan-100  border-cyan-500 {{else}} bg-white border-gray-500 hover:bg-gray-50 {{/if}}  relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
+        <a href="/property/index?page={{this}}"
+          class="{{#if (eq this ../page) }}bg-white border-gray-500 hover:bg-gray-50  {{else}}text-cyan-600 bg-cyan-100  border-cyan-500 {{/if}}  relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
           aria-current="page">{{this}}</a>
         {{/each}}
 

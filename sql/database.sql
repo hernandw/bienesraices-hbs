@@ -37,6 +37,8 @@ lat varchar,
 lng varchar,
 image varchar(60),
 published boolean default false
+create_at timestamp default current_timestamp,
+update_at timestamp default current_timestamp
 );
 
 create table categories (

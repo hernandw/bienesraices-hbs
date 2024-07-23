@@ -3,11 +3,16 @@ import { models } from "../models/propertyQueries.js";
 const home = async(req, res) => {
     const category = await models.findAllCategory();
     const price = await models.findAllPrice();
+    const casas = await models.allPropertyByFilter(3);
+    const departamentos = await models.allPropertyByFilter(1);
     
   res.render("api/home", {
     title: "Home",
     category,
-    price 
+    price,
+    casas,
+    departamentos
+
   });
 };
 

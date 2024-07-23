@@ -1,4 +1,3 @@
-
 import { pool } from "../config/db.js";
 
 const createProperty = async ({
@@ -76,8 +75,6 @@ const findAllPrice = async () => {
 };
 
 const findAllPropertyByUser = async (id, limit, offset) => {
-
-  
   try {
     const sql = {
       text: "SELECT p.id, p.title, price.name AS precio, p.published, p.image, c.name AS categoria FROM propiedades p JOIN price ON p.precio_id = price.id JOIN category c ON p.category_id = c.id WHERE user_id = $1 ORDER BY p.id LIMIT $2 OFFSET $3 ",
@@ -177,8 +174,8 @@ const deleteProperty = async (id) => {
       text: "DELETE FROM propiedades WHERE id = $1",
       values: [id],
     };
-   const response = await pool.query(sql);
-    if(response.rowCount > 0) {
+    const response = await pool.query(sql);
+    if (response.rowCount > 0) {
       return true;
     } else {
       return new Error("No se pudo eliminar la propiedad");
@@ -206,7 +203,7 @@ const getAllProperties = async () => {
 
 const allPropertyByCategoryId = async (id) => {
   try {
-    const sql = { 
+    const sql = {
       text: "SELECT p.id, p.title, p.description, p.user_id, p.category_id, p.precio_id, price.name AS precio, p.published, p.image, p.wc, p.rooms, p.parking, p.street, p.lat, p.lng, c.name AS categoria FROM propiedades p JOIN price ON p.precio_id = price.id JOIN category c ON p.category_id = c.id WHERE category_id = $1",
       values: [id],
     };
@@ -217,10 +214,31 @@ const allPropertyByCategoryId = async (id) => {
     } else {
       return false;
     }
+  } catch (error) {
+    console.log("Error code: ", error.code, "\nMessage: ", error.message);
+  }
+};
+
+//mostrar todas las propiedades por categorias con un limite de 3
+const allPropertyByFilter = async (id) => {
+  try {
+    const sql = {
+text: "SELECT p.id, p.title, p.description, p.user_id, p.category_id, p.precio_id, price.name AS precio, p.published, p.image, p.wc, p.rooms, p.parking, p.street, p.lat, p.lng, c.name AS categoria FROM propiedades p JOIN price ON p.precio_id = price.id JOIN category c ON p.category_id = c.id WHERE category_id = $1 order by createat desc LIMIT 3",
+values: [id],
+}
+
+    const response = await pool.query(sql);
+    if (response.rowCount > 0) {
+     
+      return response.rows;
+    } else {
+      return false;
+    }
 
   } catch (error) {
     console.log("Error code: ", error.code, "\nMessage: ", error.message);
   }
+
 }
 export const models = {
   createProperty,
@@ -232,5 +250,6 @@ export const models = {
   deleteProperty,
   countPropertyByUser,
   getAllProperties,
-  allPropertyByCategoryId
+  allPropertyByCategoryId,
+  allPropertyByFilter
 };

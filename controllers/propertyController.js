@@ -162,10 +162,10 @@ const editForm = async (req, res) => {
   console.log(prop);
 
   if (!prop) {
-    return res.redirect("/property");
+    return res.redirect("/property/index");
   }
   if (prop.user_id !== idUser) {
-    return res.redirect("/property");
+    return res.redirect("/property/index");
   }
 
   
@@ -283,6 +283,12 @@ const { id } = req.params;
   }
 };
 
+const allPropertyByFilter = async (req, res) => {
+  const { id } = req.params;
+  const properties = await models.allPropertyByFilter(id);
+  res.status(200).json(properties);
+};
+
 
 export const propiedadesController = {
   admin,
@@ -293,5 +299,6 @@ export const propiedadesController = {
   deleteProperty,
   getPropertiesById,
   getAllProperties,
-  allPropertyByCategoryId
+  allPropertyByCategoryId,
+  allPropertyByFilter
 };
