@@ -23,10 +23,14 @@ router.post(
   propiedadesController.deleteProperty
 );
 
+router.get('')
+
 //Propiedades Públicas
 
 router.get("/:id", identifyUser, propiedadesController.getPropertiesById);
 
 router.get("/category/:id", identifyUser, propiedadesController.allPropertyByCategoryId);
+
+router.post("/:id", identifyUser, propiedadesController.sentMessage);
 
 export default router;

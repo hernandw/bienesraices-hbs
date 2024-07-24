@@ -68,3 +68,12 @@ INSERT INTO public.propiedades (id,title,description,rooms,parking,wc,street,lat
 	 ('vm8u9ndhusehbm45ini1e','Casa en Azapa','casa en Azapa muy cerca d elos colegios',3,2,2,'Avenida Senador Humberto Manuel Palza Corvacho 42','-18.490453594593','-70.285495384729',true,'/uploads/c8fd4fd0.png',5,1,4),
 	 ('z5rbw5i12in1c8iooov7n','Condominio Novo Azapa','Apartamento frente a la piscina',2,1,2,'Avenida Alcalde Manuel Castillo Ibaceta 2925','-18.493692697256','-70.287333284639',true,'/uploads/a5ca154a.png',5,1,3),
 	 ('n7okql6gba6m5fy0q79y','Condominio Neo Azapa','Cerca del Agro',2,2,1,'Avenida Alcalde Manuel Castillo Ibaceta 3339','-18.497083638721','-70.286305181273',true,'/uploads/cb630a7a.png',6,1,3);
+
+	 CREATE TABLE message (
+    id serial PRIMARY KEY,
+    message varchar(200) NOT NULL,
+    user_id int REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    property_id varchar REFERENCES propiedades(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    createAt timestamp DEFAULT now(),
+    updateAt timestamp DEFAULT now()
+);

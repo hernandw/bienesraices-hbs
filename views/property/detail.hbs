@@ -41,14 +41,34 @@
                 {{#unless vendedor}}
                 <h3 class="text-2xl text-center my-10 font-extrabold text-gray-900">Vendedor</h3>
                 {{#if user}}
+                {{#if errors}}
+                <div class="max-w-md mx-auto my-4">
+                    {{#each errors}}
+                    <p class="bg-red-600 text-white uppercase font-bold text-xs p-2 rounded text-center mb-1">{{msg}}
+                    </p>
+                    {{/each}}
+                </div>
+                {{/if}}
+                {{#if message}}
+                <div class="max-w-md mx-auto my-4">
+                   
+                    <p class="bg-green-100 text-green-600 uppercase font-bold text-xs p-2 rounded text-center mb-1">{{message}}
+                    </p>
+                    
+                </div>
+
+                {{/if}}
 
 
                 <form method="POST">
                     <div class="space-y-5">
-                        <label for="nessage">Mensaje</label>
-                        <textarea name="message" id="message" placeholder="Escribe tu mensaje" class="w-full p-2 border border-gray-300 rounded-lg placeholder-gray-400 shadow"></textarea>
+                        <label for="message">Mensaje</label>
+                        <textarea name="message" id="message" placeholder="Escribe tu mensaje"
+                            class="w-full p-2 border border-gray-300 rounded-lg placeholder-gray-400 shadow"></textarea>
 
-                        <button type="submit" class="w-full p-2 bg-cyan-900 text-white rounded-lg uppercase font-bold shadow hover:bg-cyan-500 transition-colors duration-300 cursor-pointer">Enviar mensaje</button>
+                        <button type="submit"
+                            class="w-full p-2 bg-cyan-900 text-white rounded-lg uppercase font-bold shadow hover:bg-cyan-500 transition-colors duration-300 cursor-pointer">Enviar
+                            mensaje</button>
 
                     </div>
                 </form>

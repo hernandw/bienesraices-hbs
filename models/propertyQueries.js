@@ -209,7 +209,6 @@ const allPropertyByCategoryId = async (id) => {
     };
     const response = await pool.query(sql);
     if (response.rowCount > 0) {
-      
       return response.rows;
     } else {
       return false;
@@ -243,8 +242,8 @@ const allPropertyBySearch = async (termino) => {
     const sql = {
       text: "SELECT * FROM propiedades WHERE title ILIKE $1",
       values: [`%${termino}%`],
-    }
-  
+    };
+
     const response = await pool.query(sql);
     if (response.rowCount > 0) {
       return response.rows;
@@ -254,7 +253,25 @@ const allPropertyBySearch = async (termino) => {
   } catch (error) {
     console.log("Error code: ", error.code, "\nMessage: ", error.message);
   }
-}
+};
+
+const sentMessage = async ({ message, property_id, user_id }) => {
+  try {
+    const sql = {
+      text: "INSERT INTO message (message, property_id, user_id) VALUES ($1, $2, $3) RETURNING *",
+      values: [message, property_id, user_id],
+    };
+    const response = await pool.query(sql);
+    if (response.rowCount > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.log("Error code: ", error.code, "\nMessage: ", error.message);
+  }
+};
+
 export const models = {
   createProperty,
   findAllCategory,
@@ -267,5 +284,6 @@ export const models = {
   getAllProperties,
   allPropertyByCategoryId,
   allPropertyByFilter,
-  allPropertyBySearch
+  allPropertyBySearch,
+  sentMessage,
 };

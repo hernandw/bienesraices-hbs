@@ -243,20 +243,18 @@ const getPropertiesById = async (req, res) => {
 
   const prop = await models.findPropertyById(id);
 
-
-
   if (!prop) {
     return res.redirect("/notFound");
   }
 
   const vendedor = isSeller(req.user?.id, prop.user_id);
-  
+
   res.render("property/detail", {
     title: "Detalle",
     propiedad: prop,
     barra: true,
     user: req.user,
-    vendedor
+    vendedor,
   });
 };
 
@@ -296,6 +294,59 @@ const allPropertyByFilter = async (req, res) => {
   res.status(200).json(properties);
 };
 
+const sentMessage = async (req, res) => {
+  const { id } = req.params;
+  const { message } = req.body;
+
+  await check("message")
+    .isLength({ min: 10 })
+    .withMessage("El mensaje debe tener al menos 10 caracteres")
+    .run(req);
+
+  const prop = await models.findPropertyById(id);
+  const vendedor = isSeller(req.user?.id, prop.user_id);
+
+  //validar errores
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.render("property/detail", {
+      propiedad: prop,
+      user: req.user,
+      vendedor,
+      errors: errors.array(),
+    });
+  }
+
+  if (!prop) {
+    return res.redirect(404, "/notFound");
+  }
+
+  const objectMessage = {
+    property_id: id,
+    user_id: req.user.id,
+    message,
+  };
+  await models.sentMessage(objectMessage);
+
+  try {
+    return res.render("property/detail", {
+      propiedad: prop,
+      user: req.user.id,
+      vendedor,
+      message: "El mensaje se envio correctamente",
+    });
+    
+  } catch (error) {
+    console.log("Error code: ", error.code, "\nMessage: ", error.message);
+  }
+};
+
+const readMessage = async(req, res) => {
+  res.send('readMessage')
+}
+
 export const propiedadesController = {
   admin,
   createForm,
@@ -307,4 +358,6 @@ export const propiedadesController = {
   getAllProperties,
   allPropertyByCategoryId,
   allPropertyByFilter,
+  sentMessage,
+  readMessage
 };
