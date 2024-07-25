@@ -306,6 +306,23 @@ const readMessage = async (id) => {
   }
 };
 
+const published = async (id) => {
+  try {
+    const sql = {
+      text: "UPDATE propiedades SET published = CASE WHEN published = true THEN false ELSE true END WHERE id = $1",
+      values: [id],
+    };
+    const response = await pool.query(sql);
+    if (response.rowCount > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.log("Error code: ", error.code, "\nMessage: ", error.message);
+  }
+};
+
 export const models = {
   createProperty,
   findAllCategory,
@@ -321,5 +338,6 @@ export const models = {
   allPropertyBySearch,
   sentMessage,
   readMessage,
-  countMessagesByProperty
+  countMessagesByProperty,
+  published,
 };

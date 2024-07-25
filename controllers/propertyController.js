@@ -357,6 +357,12 @@ const readMessage = async(req, res) => {
  res.render("property/messages", { messages })
 }
 
+const published = async(req, res) => {
+  const { id } = req.params;
+  await models.published(id)
+
+  res.redirect("/property/index")}
+
 export const propiedadesController = {
   admin,
   createForm,
@@ -369,5 +375,6 @@ export const propiedadesController = {
   allPropertyByCategoryId,
   allPropertyByFilter,
   sentMessage,
-  readMessage
+  readMessage,
+  published
 };
