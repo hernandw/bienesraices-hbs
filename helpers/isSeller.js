@@ -3,6 +3,12 @@
 
 }
 
+const formatearFechas = (date) => {
+    const fecha = new Date(date).toLocaleDateString();
+    return fecha;
+};
+
 export {
-    isSeller
+    isSeller,
+    formatearFechas
 }

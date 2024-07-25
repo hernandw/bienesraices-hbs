@@ -7,6 +7,8 @@ import propertyRoutes from "./routes/propertyRoutes.js";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 
+import { formatearFechas } from "./helpers/isSeller.js";
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -31,7 +33,11 @@ app.engine(
       },
       rest: (a, b) => {
         return a - b;
-      }
+      },
+      formatearFechas: (date) => {
+        const fecha = new Date(date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
+        return fecha;
+      },
       
     },
   })

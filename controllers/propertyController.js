@@ -4,7 +4,7 @@ import { generateId } from "../helpers/generateId.js";
 import { generarArray } from "../helpers/generarArray.js";
 import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
-import { isSeller } from "../helpers/isSeller.js";
+import {  isSeller } from "../helpers/isSeller.js";
 
 const admin = async (req, res) => {
   const id = req.user;
@@ -16,10 +16,10 @@ const admin = async (req, res) => {
   const propiedades = await models.findAllPropertyByUser(id, limit, offset);
   const prop = await models.countPropertyByUser(id);
   const total = prop.length || 0;
-  const countMessages = await models.countMessagesByProperty(id);
+  
   const paginas = generarArray(Math.ceil(total / limit));
   const totalPages = Math.ceil(total / limit);
-  console.log(countMessages)
+
 
   res.render("property/index", {
     title: "Mis Propiedades",
@@ -305,8 +305,9 @@ const sentMessage = async (req, res) => {
     .withMessage("El mensaje debe tener al menos 10 caracteres")
     .run(req);
 
-  const prop = await models.findPropertyById(id);
+  const prop = await models.readMessage(id);
   const vendedor = isSeller(req.user?.id, prop.user_id);
+ 
 
   //validar errores
 
@@ -349,7 +350,8 @@ const readMessage = async(req, res) => {
   const { id } = req.params;
 
  const messages = await models.readMessage(id);
- console.log(messages)
+ 
+ 
  
  
  res.render("property/messages", { messages })
