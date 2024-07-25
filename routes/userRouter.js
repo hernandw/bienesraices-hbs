@@ -12,6 +12,9 @@ router.get("/login", controller.loginForm);
 router.post("/login", controller.login);
 
 
+router.get("/logout", controller.logout);
+
+
 router.post("/register", controller.register);
 router.get("/confirmar/:token", controller.checkToken); //confirma el token de registro
 

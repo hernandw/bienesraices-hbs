@@ -244,6 +244,11 @@ const login = async (req, res) => {
   }
 };
 
+const logout = (req, res) => {
+  res.clearCookie("tokenJWT");
+  return res.redirect("/auth/login");
+};
+
 export const controller = {
   register,
   registerForm,
@@ -253,6 +258,6 @@ export const controller = {
   forgetPassword,
   checkTokenReset,
   passwordReset,
-
+  logout,
   login,
 };
