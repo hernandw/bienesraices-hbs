@@ -34,6 +34,7 @@
 
 </div>
 
+{{#if casas}}
 <section class="py-5">
     <h2 class="text-center text-4xl font-extrabold pt-10">Casas en Venta</h2>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-14 px-5">
@@ -42,6 +43,8 @@
         {{/each}}
 
 </section>
+{{/if}}
+{{#if departamentos}}
 <section class="py-5">
     <h2 class="text-center text-4xl font-extrabold pt-10">Apartamentos en Venta</h2>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-14 px-5">
@@ -50,6 +53,7 @@
         {{/each}}
 
 </section>
+{{/if}}
 
 
 

@@ -205,7 +205,7 @@ const deleteProperty = async (id) => {
 const getAllProperties = async () => {
   try {
     const sql = {
-      text: "SELECT p.id, p.title, p.description, p.user_id, p.category_id, p.precio_id, price.name AS precio, p.published, p.image, p.wc, p.rooms, p.parking, p.street, p.lat, p.lng, c.name AS categoria FROM propiedades p JOIN price ON p.precio_id = price.id JOIN category c ON p.category_id = c.id",
+      text: "SELECT p.id, p.title, p.description, p.user_id, p.category_id, p.precio_id, price.name AS precio, p.published, p.image, p.wc, p.rooms, p.parking, p.street, p.lat, p.lng, c.name AS categoria FROM propiedades p JOIN price ON p.precio_id = price.id JOIN category c ON p.category_id = c.id where p.published = true",
     };
     const response = await pool.query(sql);
     if (response.rowCount > 0) {
@@ -221,7 +221,7 @@ const getAllProperties = async () => {
 const allPropertyByCategoryId = async (id) => {
   try {
     const sql = {
-      text: "SELECT p.id, p.title, p.description, p.user_id, p.category_id, p.precio_id, price.name AS precio, p.published, p.image, p.wc, p.rooms, p.parking, p.street, p.lat, p.lng, c.name AS categoria FROM propiedades p JOIN price ON p.precio_id = price.id JOIN category c ON p.category_id = c.id WHERE category_id = $1",
+      text: "SELECT p.id, p.title, p.description, p.user_id, p.category_id, p.precio_id, price.name AS precio, p.published, p.image, p.wc, p.rooms, p.parking, p.street, p.lat, p.lng, c.name AS categoria FROM propiedades p JOIN price ON p.precio_id = price.id JOIN category c ON p.category_id = c.id WHERE category_id = $1 AND p.published = true",
       values: [id],
     };
     const response = await pool.query(sql);
@@ -239,7 +239,7 @@ const allPropertyByCategoryId = async (id) => {
 const allPropertyByFilter = async (id) => {
   try {
     const sql = {
-      text: "SELECT p.id, p.title, p.description, p.user_id, p.category_id, p.precio_id, price.name AS precio, p.published, p.image, p.wc, p.rooms, p.parking, p.street, p.lat, p.lng, c.name AS categoria FROM propiedades p JOIN price ON p.precio_id = price.id JOIN category c ON p.category_id = c.id WHERE category_id = $1 order by createat desc LIMIT 3",
+      text: "SELECT p.id, p.title, p.description, p.user_id, p.category_id, p.precio_id, price.name AS precio, p.published, p.image, p.wc, p.rooms, p.parking, p.street, p.lat, p.lng, c.name AS categoria FROM propiedades p JOIN price ON p.precio_id = price.id JOIN category c ON p.category_id = c.id WHERE category_id = $1 AND p.published = true order by createat desc LIMIT 3",
       values: [id],
     };
 
