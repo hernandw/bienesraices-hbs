@@ -16,8 +16,10 @@ const admin = async (req, res) => {
   const propiedades = await models.findAllPropertyByUser(id, limit, offset);
   const prop = await models.countPropertyByUser(id);
   const total = prop.length || 0;
+  const countMessages = await models.countMessagesByProperty(id);
   const paginas = generarArray(Math.ceil(total / limit));
   const totalPages = Math.ceil(total / limit);
+  console.log(countMessages)
 
   res.render("property/index", {
     title: "Mis Propiedades",
@@ -344,7 +346,13 @@ const sentMessage = async (req, res) => {
 };
 
 const readMessage = async(req, res) => {
-  res.send('readMessage')
+  const { id } = req.params;
+
+ const messages = await models.readMessage(id);
+ console.log(messages)
+ 
+ 
+ res.render("property/messages", { messages })
 }
 
 export const propiedadesController = {

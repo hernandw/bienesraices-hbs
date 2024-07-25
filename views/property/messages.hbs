@@ -1,0 +1,27 @@
+<div class="py-5">
+    <h1 class="text-2xl my-10 font-extrabold text-center">{{propiedad.title}}</h1>
+    <a href="/property/index"
+        class="rounded-md bg-cyan-800 text-white uppercase font-bold text-sm py-2 px-10 text-center hover:bg-cyan-700 transition-colors w-full sm:w-auto inline-block mb-5">Volver</a>
+    <div class="mx-auto max-w-4xl bg-white py-8 px-4 shadow">
+        {{#if messages}}
+        <ul>
+            {{#each messages}}
+            <li class="border-gray-200 border-b py-5">
+                <p class="text-gray-600 font-bold"> Nombre: <span class="font-normal">{{this.name}}</span></p>
+                <p class="text-gray-600 font-bold"> Email: <span class="font-normal">{{this.email}}</span></p>
+                <p class="text-gray-600 font-bold">Mensaje: <span class="font-normal">{{this.message}}</span></p>
+                <p class="text-gray-600 font-bold">Recibido: <span class="font-normal">{{this.createat}}</span></p>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+    {{else}}
+    <div class="max-w-md mx-auto my-4">
+
+        <p class="text-center text-gray-600 p-5">No Hay mensajes</p>
+
+    </div>
+    {{/if}}
+</div>
+
+</div>

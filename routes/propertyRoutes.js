@@ -23,7 +23,7 @@ router.post(
   propiedadesController.deleteProperty
 );
 
-router.get('')
+router.get('/messages/:id', propiedadesController.readMessage)
 
 //Propiedades Públicas
 

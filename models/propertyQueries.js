@@ -108,6 +108,23 @@ const countPropertyByUser = async (id) => {
   }
 };
 
+const countMessagesByProperty = async (id) => {
+  try {
+    const sql = {
+      text: "SELECT * FROM message WHERE property_id = $1",
+      values: [id],
+    };
+    const response = await pool.query(sql);
+    if (response.rowCount > 0) {
+      return response.rows;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.log("Error code: ", error.code, "\nMessage: ", error.message);
+  }
+};
+
 const findPropertyById = async (id) => {
   try {
     const sql = {
@@ -272,6 +289,23 @@ const sentMessage = async ({ message, property_id, user_id }) => {
   }
 };
 
+const readMessage = async (id) => {
+  try {
+    const sql = {
+      text: "select p.id, p.user_id, p.category_id, u.name, u.email, m.message, m.createat from propiedades p join users u on p.user_id = u.id join message m on m.property_id = p.id WHERE property_id = $1",
+      values: [id],
+    };
+    const response = await pool.query(sql);
+    if (response.rowCount > 0) {
+      return response.rows;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.log("Error code: ", error.code, "\nMessage: ", error.message);
+  }
+};
+
 export const models = {
   createProperty,
   findAllCategory,
@@ -286,4 +320,6 @@ export const models = {
   allPropertyByFilter,
   allPropertyBySearch,
   sentMessage,
+  readMessage,
+  countMessagesByProperty
 };
