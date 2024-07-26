@@ -1,23 +1,25 @@
-const createTableCategory = `CREATE TABLE IF NOT EXISTS category(
+const createTableCategory = `CREATE TABLE IF NOT EXISTS public.category(
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL
 )`;
-const createTablePrice = `CREATE TABLE IF NOT EXISTS price(
+const createTablePrice = `CREATE TABLE IF NOT EXISTS public.price(
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL
     
 )`;
 
-const createTableUsers = `CREATE TABLE IF NOT EXISTS users(
+const createTableUsers = `CREATE TABLE IF NOT EXISTS public.users(
     id SERIAL PRIMARY KEY,
     name VARCHAR(60) NOT NULL,
     email VARCHAR(60) NOT NULL UNIQUE,
     password VARCHAR(60) NOT NULL,
     token VARCHAR(60),
-    confirm BOOLEAN
+    confirm BOOLEAN,
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp
 )`;
 
-const createTablePropiedades = `CREATE TABLE IF NOT EXISTS propiedades (
+const createTablePropiedades = `CREATE TABLE IF NOT EXISTS public.propiedades (
     id VARCHAR(30) PRIMARY KEY,
     title VARCHAR(100) NOT NULL,
     description VARCHAR(100) NOT NULL,
@@ -31,7 +33,16 @@ const createTablePropiedades = `CREATE TABLE IF NOT EXISTS propiedades (
     image VARCHAR(100),
     precio_id INTEGER NOT NULL REFERENCES price(id) ON DELETE CASCADE ON UPDATE CASCADE,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    category_id INTEGER NOT NULL REFERENCES category(id) ON DELETE CASCADE ON UPDATE CASCADE
+    category_id INTEGER NOT NULL REFERENCES category(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    created_at timestamp default current_timestamp
+)`;
+
+const createTableMessages = `CREATE TABLE IF NOT EXISTS public.messages (
+    id SERIAL PRIMARY KEY,
+    message VARCHAR(100) NOT NULL,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    property_id VARCHAR(30) NOT NULL REFERENCES propiedades(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    created_at timestamp default current_timestamp
 )`;
 
 const insertCategory = `INSERT INTO category(name) VALUES ('Vivienda'), ('Comercio'), ('Casa'), ('Terreno'), ('Oficina');`;
@@ -45,6 +56,7 @@ export const querys = {
   createTableCategory,
   createTablePropiedades,
   createTablePrice,
+  createTableMessages,
   insertCategory,
   insertPrice,
 };

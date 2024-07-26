@@ -3,29 +3,92 @@
 
 
         {{#if barra}}
-        <nav class="h-20 w-full bg-cyan-800 text-white text-sm md:flex md:items-center font-bold hidden md:justify-end">
-
-            <a class="h-full w-32 text-white uppercase font-bold text-xs text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold border-l-2 border-white" href="/property/index">Mis Propiedades</a>
-            <a class="h-full w-32 text-white uppercase font-bold text-xs text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold border-l-2 border-white" href="#">Mis Perfil</a>
-            <a href="/auth/logout" class="h-full w-32 text-white uppercase font-bold text-xs text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold border-l-2 border-white " href="#" class="bg-cyan-800 py-2 px-10 rounded-lg">Cerrar Sesión</a>
-
+        <nav class="w-full flex items-center justify-between flex-wrap bg-cyan-800 p-6">
+            <div class="flex items-center flex-shrink-0 text-white mr-6">
+                
+            </div>
+            <div class="block md:hidden">
+                <button id='boton'
+                    class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+                    <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <title>Menu</title>
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                    </svg>
+                </button>
+            </div>
+            <div id='menu' class="w-full block flex-grow md:flex md:items-center md:w-auto hidden px-24">
+                <div class="text-sm md:flex justify-between md:flex-grow">
+                    <a href="/"
+                        class="text-white uppercase font-bold text-xs text-center px-4 py-2  hover:bg-green-500 flex justify-center items-center hover:font-bold rounded">
+                        Inicio
+                    </a>
+                    <a href="/about"
+                        class="text-white uppercase font-bold text-xs px-4 py-2 rounded text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold">
+                        Quienes Somos
+                    </a>
+                    <a href="/property/index"
+                        class="text-white uppercase font-bold text-xs text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold border px-4 py-2 rounded border-white hover:border-transparent  hover:bg-green-500 mt-4 md:mt-0 w-25">
+                        Mis Propiedades
+                    </a>
+                    <a href="/auth/logout"
+                        class="text-white uppercase font-bold text-xs text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold border px-4 py-2 rounded border-white hover:border-transparent hover:bg-green-500 mt-4 md:mt-0">
+                        Cerrar Sesión
+                    </a>
+                    <a href="/contact"
+                        class="text-white uppercase font-bold text-xs text-center px-4 py-2 rounded  hover:bg-green-500 flex justify-center items-center hover:font-bold">
+                        Contactos
+                    </a>
+                </div>
+                {{!-- <div>
+                    <a href="#"
+                        class="inline-block text-sm  leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Download</a>
+                </div> --}}
+            </div>
         </nav>
 
         {{else}}
-        <nav
-            class="bg-cyan-800 h-20 w-full text-sm md:flex md:items-center  font-bold text-white hidden ">
-            <a class=" h-full w-28 text-white uppercase font-bold text-xs text-center hover:text-white hover:bg-green-500 flex justify-center items-center hover:font-bold border-l-2 border-white active:bg-green-500"
-                href="/">Inicio</a>
-            <a class=" h-full w-24 text-white uppercase font-bold text-xs text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold border-l-2 border-white"
-                href="/about">Quienes Somos</a>
-            <a class=" h-full w-24 text-white uppercase font-bold text-xs text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold border-l-2 border-white"
-                href="/auth/login">Inicio Sesión</a>
-            <a class=" h-full w-24 text-white uppercase font-bold text-xs text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold border-l-2 border-white"
-                href="/auth/register">Registrarse</a>
-            <a class=" h-full w-24 text-white uppercase font-bold text-xs text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold border-l-2 border-white"
-                href="/property/index">Propiedades</a>
-            <a class=" h-full w-24 text-white uppercase font-bold text-xs text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold border-l-2 border-white"
-                href="/contact">Contacto</a>
+        
+        <nav class="w-full flex items-center justify-between flex-wrap bg-cyan-800 p-6">
+            <div class="flex items-center flex-shrink-0 text-white mr-6">
+                
+            </div>
+            <div class="block md:hidden">
+                <button id='boton'
+                    class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white">
+                    <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <title>Menu</title>
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                    </svg>
+                </button>
+            </div>
+            <div id='menu' class="w-full block flex-grow md:flex md:items-center md:w-auto hidden px-24">
+                <div class="text-sm md:flex justify-between md:flex-grow">
+                    <a href="/"
+                        class="text-white uppercase font-bold text-xs text-center px-4 py-2  hover:bg-green-500 flex justify-center items-center hover:font-bold rounded">
+                        Inicio
+                    </a>
+                    <a href="/about"
+                        class="text-white uppercase font-bold text-xs px-4 py-2 rounded text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold">
+                        Quienes Somos
+                    </a>
+                    <a href="/auth/login"
+                        class="text-white uppercase font-bold text-xs text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold border px-4 py-2 rounded border-white hover:border-transparent  hover:bg-green-500 mt-4 md:mt-0 w-25">
+                        Iniciar Sesión
+                    </a>
+                    <a href="/auth/register"
+                        class="text-white uppercase font-bold text-xs text-center  hover:bg-green-500 flex justify-center items-center hover:font-bold border px-4 py-2 rounded border-white hover:border-transparent hover:bg-green-500 mt-4 md:mt-0">
+                        Registrarse
+                    </a>
+                    <a href="/contact"
+                        class="text-white uppercase font-bold text-xs text-center px-4 py-2 rounded  hover:bg-green-500 flex justify-center items-center hover:font-bold">
+                        Contactos
+                    </a>
+                </div>
+                {{!-- <div>
+                    <a href="#"
+                        class="inline-block text-sm  leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">Download</a>
+                </div> --}}
+            </div>
         </nav>
 
         {{/if}}

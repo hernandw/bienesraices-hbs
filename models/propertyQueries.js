@@ -111,7 +111,7 @@ const countPropertyByUser = async (id) => {
 const countMessagesByProperty = async (id) => {
   try {
     const sql = {
-      text: "SELECT * FROM message WHERE property_id = $1",
+      text: "SELECT * FROM messages WHERE property_id = $1",
       values: [id],
     };
     const response = await pool.query(sql);
@@ -239,7 +239,7 @@ const allPropertyByCategoryId = async (id) => {
 const allPropertyByFilter = async (id) => {
   try {
     const sql = {
-      text: "SELECT p.id, p.title, p.description, p.user_id, p.category_id, p.precio_id, price.name AS precio, p.published, p.image, p.wc, p.rooms, p.parking, p.street, p.lat, p.lng, c.name AS categoria FROM propiedades p JOIN price ON p.precio_id = price.id JOIN category c ON p.category_id = c.id WHERE category_id = $1 AND p.published = true order by createat desc LIMIT 3",
+      text: "SELECT p.id, p.title, p.description, p.user_id, p.category_id, p.precio_id, price.name AS precio, p.published, p.image, p.wc, p.rooms, p.parking, p.street, p.lat, p.lng, c.name AS categoria FROM propiedades p JOIN price ON p.precio_id = price.id JOIN category c ON p.category_id = c.id WHERE category_id = $1 AND p.published = true order by created_at desc LIMIT 3",
       values: [id],
     };
 
@@ -275,7 +275,7 @@ const allPropertyBySearch = async (termino) => {
 const sentMessage = async ({ message, property_id, user_id }) => {
   try {
     const sql = {
-      text: "INSERT INTO message (message, property_id, user_id) VALUES ($1, $2, $3) RETURNING *",
+      text: "INSERT INTO messages (message, property_id, user_id) VALUES ($1, $2, $3) RETURNING *",
       values: [message, property_id, user_id],
     };
     const response = await pool.query(sql);
@@ -292,7 +292,7 @@ const sentMessage = async ({ message, property_id, user_id }) => {
 const readMessage = async (id) => {
   try {
     const sql = {
-      text: "select p.id, p.user_id, p.category_id, u.name, u.email, m.message, m.createat from propiedades p join users u on p.user_id = u.id join message m on m.property_id = p.id WHERE property_id = $1",
+      text: "select p.id, p.user_id, p.category_id, u.name, u.email, m.message, m.created_at from propiedades p join users u on p.user_id = u.id join messages m on m.property_id = p.id WHERE property_id = $1",
       values: [id],
     };
     const response = await pool.query(sql);

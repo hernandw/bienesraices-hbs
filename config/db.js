@@ -1,4 +1,4 @@
-import pg from 'pg';
+/* import pg from 'pg';
 import 'dotenv/config'
 const { Pool } = pg;
 
@@ -10,7 +10,8 @@ const config = {
     user: DB_USER,
     password: DB_PASSWORD,
     database: DB_DATABASE,
-    allowExitOnIdle: true
+    allowExitOnIdle: true,
+    sslmode: "require"
 }
 
 
@@ -24,4 +25,25 @@ try {
         error: error.message,
         message: 'Error connecting to database'
     })
-}
+} */
+
+    import pg from 'pg';
+    import 'dotenv/config';
+    
+    const { Pool } = pg;
+    
+    const { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE } = process.env;
+    
+    const connectionString = `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}?sslmode=require`;
+    
+    export const pool = new Pool({
+      allowExitOnIdle: true,
+      connectionString,
+    });
+    
+    try {
+      await pool.query('SELECT NOW()');
+      console.log('Database connected');
+    } catch (error) {
+      console.log(error);
+    }

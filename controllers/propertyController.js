@@ -305,10 +305,9 @@ const sentMessage = async (req, res) => {
     .withMessage("El mensaje debe tener al menos 10 caracteres")
     .run(req);
 
-  const prop = await models.readMessage(id);
+  const prop = await models.findPropertyById(id);
   const vendedor = isSeller(req.user?.id, prop.user_id);
  
-
   //validar errores
 
   const errors = validationResult(req);
