@@ -136,6 +136,9 @@ Este proyecto está bajo la Licencia MIT - ve el archivo [license.md](LICENSE) p
 
 Puedes contribuir al proyecto con un PR
 
+La BBDD está en https://neon.tech/
+El deploy del proyecto está en render.com
+
 ---
 
 ⌨️ con ❤️ por [Williams Hernández](https://github.com/hernandw) 😊
