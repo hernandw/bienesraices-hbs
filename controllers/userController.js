@@ -9,7 +9,7 @@ import {
 import { generateId } from "../helpers/generateId.js";
 
 import { generateToken } from "../helpers/generateToken.js";
-process.loadEnvFile();
+import 'dotenv/config';
 
 const registerForm = (req, res) => {
   res.render("auth/register", {
@@ -29,11 +29,6 @@ const forget = (req, res) => {
   });
 };
 
-/* const resetPassword = (req, res) => {
-  res.render("resetPassword", {
-    title: "Restablece tu contraseña",
-  });
-}; */
 
 const register = async (req, res) => {
   const { name, email, password, password2 } = req.body;

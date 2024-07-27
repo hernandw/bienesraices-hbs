@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-process.loadEnvFile();
+import 'dotenv/config';
 
 export const protectedRoutes = async(req, res, next) => {
   //verificar el token

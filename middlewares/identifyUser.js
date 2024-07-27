@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-process.loadEnvFile();
+import 'dotenv/config';
 
 const identifyUser = async (req, res, next) => {
   

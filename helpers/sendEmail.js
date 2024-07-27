@@ -1,5 +1,5 @@
 import nodemailer from "nodemailer";
-process.loadEnvFile()
+import 'dotenv/config';
 
 const { EMAIL_USER, EMAIL_PASS, EMAIL_HOST, EMAIL_PORT, FRONTEND_URL, PORT } = process.env
 
