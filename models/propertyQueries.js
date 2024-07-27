@@ -95,23 +95,7 @@ const countPropertyByUser = async (id) => {
   try {
     const sql = {
       text: "SELECT * FROM propiedades WHERE user_id = $1",
-      values: [id],
-    };
-    const response = await pool.query(sql);
-    if (response.rowCount > 0) {
-      return response.rows;
-    } else {
-      return false;
-    }
-  } catch (error) {
-    console.log("Error code: ", error.code, "\nMessage: ", error.message);
-  }
-};
 
-const countMessagesByProperty = async (id) => {
-  try {
-    const sql = {
-      text: "SELECT * FROM messages WHERE property_id = $1",
       values: [id],
     };
     const response = await pool.query(sql);
@@ -292,7 +276,7 @@ const sentMessage = async ({ message, property_id, user_id }) => {
 const readMessage = async (id) => {
   try {
     const sql = {
-      text: "select p.id, p.user_id, p.category_id, u.name, u.email, m.message, m.created_at from propiedades p join users u on p.user_id = u.id join messages m on m.property_id = p.id WHERE property_id = $1",
+      text: "SELECT  u.name, u.email, m.message, m.created_at FROM  messages m JOIN users u ON m.user_id = u.id JOIN propiedades p ON m.property_id = p.id  WHERE property_id = $1",
       values: [id],
     };
     const response = await pool.query(sql);
@@ -338,6 +322,5 @@ export const models = {
   allPropertyBySearch,
   sentMessage,
   readMessage,
-  countMessagesByProperty,
   published,
 };

@@ -7,6 +7,8 @@ import fs from "fs";
 import { isSeller } from "../helpers/isSeller.js";
 
 const admin = async (req, res) => {
+
+
   const id = req.user;
   const limit = req.query.limit || 4;
   const page = parseInt(req.query.page) || 1;
@@ -19,6 +21,10 @@ const admin = async (req, res) => {
   const paginas = generarArray(Math.ceil(total / limit));
   const totalPages = Math.ceil(total / limit);
   const user = req.user; //verifica si esta logueado para el menu
+  const messages = await models.readMessage(id);
+  
+  
+  
 
   res.render("property/index", {
     title: "Mis Propiedades",
@@ -32,12 +38,12 @@ const admin = async (req, res) => {
     endIndex,
     totalPages,
     user,
+    prop,
+    messages
   });
 };
 
-
 const createForm = async (req, res) => {
- 
   try {
     res.render("property/create", {
       title: "Crear Propiedades",
@@ -129,7 +135,6 @@ const saveForm = async (req, res) => {
         categories: await models.findAllCategory(),
         prices: await models.findAllPrice(),
         errors: [{ msg: "Subir una imagen es obligatorio" }],
-        
       });
     }
     const { image } = req.files;
@@ -156,7 +161,7 @@ const saveForm = async (req, res) => {
     };
 
     await models.createProperty(propiedad);
-    await res.status(201).render("/property/index",{
+    await res.status(201).render("/property/index", {
       title: "Propiedades Creadas",
       user: req.user.id || 0,
     });
@@ -250,6 +255,7 @@ const deleteProperty = async (req, res) => {
 
 const getPropertiesById = async (req, res) => {
   const { id } = req.params;
+ 
 
   const prop = await models.findPropertyById(id);
 
@@ -316,6 +322,7 @@ const sentMessage = async (req, res) => {
 
   const prop = await models.findPropertyById(id);
   const vendedor = isSeller(req.user?.id, prop.user_id);
+  
 
   //validar errores
 
@@ -357,8 +364,10 @@ const readMessage = async (req, res) => {
   const { id } = req.params;
 
   const messages = await models.readMessage(id);
+ 
 
-  res.render("property/messages", { messages });
+
+  res.render("property/messages", { messages, user: req.user || 0 });
 };
 
 const published = async (req, res) => {

@@ -7,8 +7,6 @@ import propertyRoutes from "./routes/propertyRoutes.js";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 
-import { formatearFechas } from "./helpers/isSeller.js";
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -53,6 +51,7 @@ app.engine(
     },
   })
 );
+
 app.set("view engine", "hbs");
 app.set("views", "./views");
 

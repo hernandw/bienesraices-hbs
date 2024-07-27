@@ -8,12 +8,14 @@
 
   <div class="bg-white shadow rounded-lg">
     <ul class="divide-y divide-gray-200">
+      
       {{#each propiedades}}
       <li>
         <div
           class="p-6 w-full flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-8 gap-4 md:space-y-0">
           <div class="sm:w-1/4 md:w-1/6">
             <img class="w-full block" src="{{this.image}}" alt="imagen propiedad {{this.title}}">
+            {{total}}
           </div>
 
           <div class="sm:w-2/4 md:w-3/6 lg:w-4/6 space-y-3">
