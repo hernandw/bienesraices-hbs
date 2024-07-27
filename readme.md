@@ -1,88 +1,130 @@
-# Titulo del proyecto
+# Espacio Inversión - Venta de Inmuebles
 
-Breve descripción del proyecto y su objetivo.
+Este proyecto consiste en un sitio web de venta de inmuebles. Permite publicar tus propiedades en ventas.
 
-## Descripción del proyecto
+## Descripción del proyecto:
 
-¿Estás comenzando un proyecto pequeño, un desafío de programación o un tutorial, y necesitas una forma rápida y sencilla de crear documentación básica? ¡Esta plantilla README minimalista es para ti!
+Este proyecto busca no solo hacer un página funcional sino utilizar diversas herramientas tanto del lado del Frontend como del Backend y Base de Datos Postgres.  Es un proyecto que será creciendo y agregando nuevas funcionalidades y mejorars
+
+
 
 ## Capturas de Pantalla del Proyecto
 
-Incluir capturas de pantalla o imágenes que muestren el proyecto en funcionamiento.
 
-![Home](imagenes/home.png)
+
+![Home](public/images/inicio.png)
 Vista inicio de la aplicación.
+
+![registro](public/images/registro.png)
+Registro de usuarios.
+
+![login](public/images/valida_login.png)
+Registrar Propiedades
+
+![publicarmensajes](public/images/enviar_mensaje.png)
+Registrar Propiedades
+
+![leer](public/images/leer_mensajes.png)
+Registrar Propiedades
+
 
 ## Prerrequisitos o Dependencias
 
 Lista de software y herramientas, incluyendo versiones, que necesitas para instalar y ejecutar este proyecto:
-
-- Sistema Operativo (por ejemplo, Ubuntu 20.04, Windows 10)
-- Lenguaje de programación (por ejemplo, Python 3.8)
-- Framework (por ejemplo, Django 3.1)
-- Base de datos (por ejemplo, PostgreSQL 12)
-- Otros...
+- bcrypt: "^5.1.1",
+- cookie-parser: "^1.4.6",
+- dotenv: "^16.4.5",
+- express: "^4.19.2",
+- express-fileupload: "^1.5.0",
+- express-handlebars: "^7.1.3",
+- express-validator: "^7.1.0",
+- jsonwebtoken: "^9.0.2",
+- nodemailer: "^6.9.14",
+- pg: "^8.12.0",
+- uuid: "^10.0.0"
 
 ## Instalación del Proyecto
 
 Una guía paso a paso sobre cómo configurar el entorno de desarrollo e instalar todas las dependencias.
 
+1. Copiar el repositorio:
+
 ```bash
-# paso 1
+# git@github.com:hernandw/bienesraices-hbs.git
 ```
 
-Y así sucesivamente...
+2. Clona en tu computadora
 
 ```bash
-# paso 2
+# git clone git@github.com:hernandw/bienesraices-hbs.git
 ```
 
 ## Instrucciones para Ejecutar el Proyecto
 
-Instrucciones para ejecutar el proyecto una vez instalado.
+3. Instala las dependencias del proyecto
 
 ```bash
-#
+# npm install
+```
+
+4. Configura las variables de entorno en tu máquina
+
+```
+ 
+DB_USER=
+DB_PASSWORD=
+DB_HOST=
+DB_DATABASE=
+DB_PORT=
+
+PORT=
+
+JWT_SECRET_KEY=
+
+--Debes obtener una api_key de https://hed9q8m1deoiljc1.maps.arcgis.com/home/index.html 
+
+API_KEY=
+
+--Debes crear una cuenta en mailtrap o brevo
+
+EMAIL_HOST=
+EMAIL_PORT=
+EMAIL_USER=
+EMAIL_PASS=
+
+
+FRONTEND_URL=http://localhost
 ```
 
 ## Instrucciones para Cargar la Base de Datos o Migrar los Modelos
 
 Instrucciones necesario para cargar la base de datos o migrar los modelos de datos.
 
+5. crea la base de datos SQL postgres en tu herramienta de preferencia
+
 ```bash
-#
+# create database bienesraices
 ```
 
 ## Instrucciones para Cargar los Datos Semilla a la Base de Datos
 
 Comandos necesario para cargar los datos semilla a la base de datos.
 
-```bash
-# paso 1
-```
-
-Y así sucesivamente...
+6. Crea las tablas y carga los datos iniciales con el siguiente comando:
 
 ```bash
-# paso 2
+# npm run tables
 ```
 
-## Credenciales de Acceso
+Ya casi listo solo debes levantar el proyecto con el siguiente comando...
 
-### Para Usuario Tipo Administrador
+```bash
+# npm run dev
+```
 
-- Email: <administrador@mail.com>
-- Contraseña: Abc123#
 
-### Para Usuario Tipo User
 
-- Email: <user@mail.com>
-- Contraseña: Abc123#
-
-Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios
-
-- **Williams Hernández** - *Trabajo Inicial* - [Williams Hernández](https://github.com/hernandw)
-- **Fulanito Detal** - *Documentación* - [fulanitodetal](https://github.com/juanito)
+- **Williams Hernández**  - [Williams Hernández](https://github.com/hernandw)
 
 ## Licencia
 
@@ -92,13 +134,7 @@ Este proyecto está bajo la Licencia MIT - ve el archivo [license.md](LICENSE) p
 
 ## Consejos Adicionales
 
-Aquí hay algunos consejos extra para aprovechar al máximo tu README:
-
-- Mantén cada sección lo más concisa posible. Evita la información innecesaria, ya que puede ser abrumadora para el lector.
-- Asegúrate de que tus instrucciones de instalación, despliegue sean detalladas y precisas. Si hay pasos adicionales que el lector necesita tomar (como instalar dependencias extra), asegúrate de
-incluirlos.
-- Los visuales (imágenes, GIFs) son muy útiles para transmitir rápidamente lo que hace tu proyecto y cómo usarlo. Si puedes, incluye capturas de pantalla de tu aplicación en acción o GIFs que
-demuestren su uso.
+Puedes contribuir al proyecto con un PR
 
 ---
 
