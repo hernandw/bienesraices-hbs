@@ -1,6 +1,6 @@
 import express from "express";
 import { engine } from "express-handlebars";
-import 'dotenv/config'
+import "dotenv/config";
 import appRoutes from "./routes/appRouter.js";
 import userRoutes from "./routes/userRouter.js";
 import propertyRoutes from "./routes/propertyRoutes.js";
@@ -25,20 +25,31 @@ app.engine(
         return a + b;
       },
       compare: (a, b) => {
-        if (a < b ) {
+        if (a < b) {
           return a;
         } else {
-          return b ;
+          return b;
         }
       },
       rest: (a, b) => {
         return a - b;
       },
       formatearFechas: (date) => {
-        const fecha = new Date(date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
+        const fecha = new Date(date).toLocaleDateString("es-ES", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          weekday: "long",
+        });
         return fecha;
       },
-      
+      valida: (id) => {
+        if (id >= 1) {
+          return true;
+        } else {
+          return false;
+        }
+      },
     },
   })
 );
@@ -66,9 +77,6 @@ app.use(express.static("public"));
 app.use("/auth", userRoutes);
 app.use("/property", propertyRoutes);
 app.use("/", appRoutes);
-
-
-
 
 app.listen(PORT, () => {
   console.log(`Server running on port http://localhost:${PORT}`);

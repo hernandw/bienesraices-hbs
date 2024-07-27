@@ -5,6 +5,8 @@ const home = async (req, res) => {
   const price = await models.findAllPrice();
   const casas = await models.allPropertyByFilter(3);
   const departamentos = await models.allPropertyByFilter(1);
+  const user = req.user?.id || 0; //verifica si esta logueado para el menu
+  
 
   res.render("api/home", {
     title: "Home",
@@ -12,6 +14,7 @@ const home = async (req, res) => {
     price,
     casas,
     departamentos,
+    user
   });
 };
 
@@ -36,12 +39,14 @@ const formRegister = (req, res) => {
 const formContact = (req, res) => {
   res.render("api/contact", {
     title: "Contact",
+    user: req.user?.id || 0,
   });
 };
 
 const about = (req, res) => {
   res.render("api/about", {
     title: "About",
+    user: req.user?.id || 0,
   });
 };
 
@@ -54,7 +59,9 @@ const search = async(req, res) => {
 const properties = await models.allPropertyBySearch(termino)
 res.render('property/search',{
   title: 'Resultado de la Búsqueda',
-  properties
+  properties,
+  user: req.user.id
+  
 })
 
 };

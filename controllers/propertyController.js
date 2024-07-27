@@ -4,7 +4,7 @@ import { generateId } from "../helpers/generateId.js";
 import { generarArray } from "../helpers/generarArray.js";
 import { v4 as uuidv4 } from "uuid";
 import fs from "fs";
-import {  isSeller } from "../helpers/isSeller.js";
+import { isSeller } from "../helpers/isSeller.js";
 
 const admin = async (req, res) => {
   const id = req.user;
@@ -16,10 +16,9 @@ const admin = async (req, res) => {
   const propiedades = await models.findAllPropertyByUser(id, limit, offset);
   const prop = await models.countPropertyByUser(id);
   const total = prop.length || 0;
-  
   const paginas = generarArray(Math.ceil(total / limit));
   const totalPages = Math.ceil(total / limit);
-
+  const user = req.user; //verifica si esta logueado para el menu
 
   res.render("property/index", {
     title: "Mis Propiedades",
@@ -32,18 +31,24 @@ const admin = async (req, res) => {
     startIndex,
     endIndex,
     totalPages,
-    barra: true,
+    user,
   });
 };
 
+
 const createForm = async (req, res) => {
-  res.render("property/create", {
-    title: "Crear Propiedades",
-    rooms: ["1", "2", "3", "4"],
-    categories: await models.findAllCategory(),
-    prices: await models.findAllPrice(),
-    barra: true,
-  });
+ 
+  try {
+    res.render("property/create", {
+      title: "Crear Propiedades",
+      rooms: ["1", "2", "3", "4"],
+      categories: await models.findAllCategory(),
+      prices: await models.findAllPrice(),
+      user: req.user,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 const saveForm = async (req, res) => {
@@ -111,7 +116,7 @@ const saveForm = async (req, res) => {
         rooms: ["1", "2", "3", "4"],
         categories: await models.findAllCategory(),
         prices: await models.findAllPrice(),
-        barra: true,
+        user: req.user.id || 0,
       });
     }
 
@@ -124,7 +129,7 @@ const saveForm = async (req, res) => {
         categories: await models.findAllCategory(),
         prices: await models.findAllPrice(),
         errors: [{ msg: "Subir una imagen es obligatorio" }],
-        barra: true,
+        
       });
     }
     const { image } = req.files;
@@ -151,7 +156,10 @@ const saveForm = async (req, res) => {
     };
 
     await models.createProperty(propiedad);
-    await res.status(201).redirect("/property/index");
+    await res.status(201).render("/property/index",{
+      title: "Propiedades Creadas",
+      user: req.user.id || 0,
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -177,7 +185,7 @@ const editForm = async (req, res) => {
       categories: await models.findAllCategory(),
       prices: await models.findAllPrice(),
       old: prop,
-      barra: true,
+      user: req.user || 0,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -251,11 +259,11 @@ const getPropertiesById = async (req, res) => {
 
   const vendedor = isSeller(req.user?.id, prop.user_id);
 
+  console.log(req.user.id);
   res.render("property/detail", {
     title: "Detalle",
     propiedad: prop,
-    barra: true,
-    user: req.user,
+    user: req.user.id || 0,
     vendedor,
   });
 };
@@ -281,6 +289,7 @@ const allPropertyByCategoryId = async (req, res) => {
       title: "CATEGORIAS",
       properties,
       category: await models.findAllCategory(),
+      user: req.user?.id || 0,
     });
   } catch (error) {
     console.log("Error code: ", error.code, "\nMessage: ", error.message);
@@ -307,7 +316,7 @@ const sentMessage = async (req, res) => {
 
   const prop = await models.findPropertyById(id);
   const vendedor = isSeller(req.user?.id, prop.user_id);
- 
+
   //validar errores
 
   const errors = validationResult(req);
@@ -335,32 +344,29 @@ const sentMessage = async (req, res) => {
   try {
     return res.render("property/detail", {
       propiedad: prop,
-      user: req.user.id,
+      user: req.user.id || 0,
       vendedor,
       message: "El mensaje se envio correctamente",
     });
-    
   } catch (error) {
     console.log("Error code: ", error.code, "\nMessage: ", error.message);
   }
 };
 
-const readMessage = async(req, res) => {
+const readMessage = async (req, res) => {
   const { id } = req.params;
 
- const messages = await models.readMessage(id);
- 
- 
- 
- 
- res.render("property/messages", { messages })
-}
+  const messages = await models.readMessage(id);
 
-const published = async(req, res) => {
+  res.render("property/messages", { messages });
+};
+
+const published = async (req, res) => {
   const { id } = req.params;
-  await models.published(id)
+  await models.published(id);
 
-  res.redirect("/property/index")}
+  res.redirect("/property/index");
+};
 
 export const propiedadesController = {
   admin,
@@ -375,5 +381,5 @@ export const propiedadesController = {
   allPropertyByFilter,
   sentMessage,
   readMessage,
-  published
+  published,
 };
